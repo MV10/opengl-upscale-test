@@ -14,11 +14,12 @@ created by user nimitz on Shadertoy.
 
 It uses OpenTK for convenient .NET OpenGL bindings and my eyecandy library to load/compile the shader files.
 
-Results from my machine:
+Results from my machine (AMD Ryzen9 3900XT, RTX2060, 64GB DDR4-4133):
 
-* With simple output directly to the OpenGL-managed backbuffer, windowed (960x540) averages around 186 FPS, and full-screen (3840x2160) tanks that to just 12 FPS.
-* With full-sized buffering those numbers are 183 FPS windowed, and still 12 FPS full-screen.
-* However, with a 1024x576 buffer upscaled to full-screen, the program reports 158 FPS.
+* Windowed size is 960x540, full-screen is 3840x2160 (4K)
+* Direct to OpenGL's backbuffer: windowed averages 186 FPS, full-screen falls to just 12 FPS.
+* Full-sized buffering: windowed 183 FPS, full-screen 12 FPS.
+* 1024x576 texture, framebuffer blitter upscaling to 4K: 158 FPS.
 
 The 1024x576 buffer dimensions were determined by setting the maximum width 1024 and calculating the height based on the viewport resolution. Note the code won't allocate a buffer that is _larger_ than the current viewport resolution. (The current code would have to be changed to also set `GL.Viewport` for this to work, but it doesn't make sense to do _more_ work than is required.)
 
